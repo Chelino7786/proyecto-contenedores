@@ -1,0 +1,4 @@
+# Docker volumes
+mysql/data/
+*.log
+.vs/

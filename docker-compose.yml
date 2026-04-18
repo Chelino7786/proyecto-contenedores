@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: contenedor_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root1234
+      MYSQL_DATABASE: usuariosdb
+      MYSQL_USER: phpuser
+      MYSQL_PASSWORD: php1234
+    volumes:
+      - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - red_compartida
+
+  php:
+    build: ./php
+    container_name: contenedor_php
+    ports:
+      - "8080:80"
+    volumes:
+      - ./php/src:/var/www/html
+    depends_on:
+      - mysql
+    networks:
+      - red_compartida
+
+networks:
+  red_compartida:
+    driver: bridge
