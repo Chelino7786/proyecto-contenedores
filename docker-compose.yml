@@ -1,6 +1,4 @@
-version: '3.8'
-
-services:
+﻿services:
 
   mysql:
     image: mysql:8.0
@@ -15,6 +13,17 @@ services:
     networks:
       - red_compartida
 
+  mysql_backup:
+    image: mysql:8.0
+    container_name: contenedor_mysql_backup
+    environment:
+      MYSQL_ROOT_PASSWORD: backup1234
+      MYSQL_DATABASE: usuariosdb_backup
+      MYSQL_USER: backupuser
+      MYSQL_PASSWORD: bkp1234
+    networks:
+      - red_compartida
+
   php:
     build: ./php
     container_name: contenedor_php
@@ -24,6 +33,7 @@ services:
       - ./php/src:/var/www/html
     depends_on:
       - mysql
+      - mysql_backup
     networks:
       - red_compartida
 
