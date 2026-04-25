@@ -39,7 +39,9 @@ Luego abre tu navegador en: http://localhost:8080
 
 ## Sistema de Backup
 Para realizar un respaldo de la base de datos ejecutar:
+mysqldump -u root -proot1234 usuariosdb | mysql -h contenedor_mysql_backup -u backupuser -pbkp1234 usuariosdb_backup
 
 Para verificar el backup:
+SHOW TABLES;
 
 ## Estructura del Proyecto
